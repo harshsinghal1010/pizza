@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td,
+		th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h2>Buy Screen</h2>
+
+	<table>
+		<tr>
+			<th>Choice of Crust</th>
+			<th>
+				<select ng-model="pcrust">
+					<option value="" selected hidden >Select Crust</option>
+					<option value="{{crust.crustName}}" ng-repeat="crust in crustList">{{crust.crustName}}</option>
+				</select>
+			</th>
+		</tr>
+
+		<tr>
+			<th>Choice of Toppings</th>
+			<th >
+					<select ng-model="pizza_topping">
+							<option value="" selected hidden >Select Toppings</option>
+							<option value="{{item}}" ng-repeat="item in toppings">{{item.name}}</option>
+						</select>
+				<!-- <input type="checkbox" ng-click="checkChange(toppingsList)" ng-value="{{topping.name}}" ng-model="toppingsList" >{{topping.name}}
+				<br> -->
+				<!-- <md-checkbox ng-checked="checkChange(item, selectedIdentifiers)" ng-click="checkClicked(item, selectedIdentifiers)">
+						{{ item.name}}
+				</md-checkbox> -->
+
+				<!-- <md-checkbox ng-checked="checkChange(item, selected)" ng-click="checkClicked(item, selected)">
+						{{ item.name }} 
+					</md-checkbox> -->
+			</th>
+		</tr>
+		<tr>
+			<th>Quantity</th>
+			<th>
+				<select ng-model="pizzaQuantity">
+					<option value="" selected hidden >select quantity</option>
+					<option value="{{quant}}" ng-repeat="quant in quantity">{{quant}}</option>
+				</select>
+			</th>
+		</tr>
+
+		
+		<tr>
+			<th>Price in Rs</th>
+			<th>
+				<input type="text" ng-model="pizzaPrice" ng-disabled="isPriceCalculated"/>
+				<br>
+			</th>
+		</tr>
+
+		<tr>
+				<!-- <th>Quantity</th> -->
+				<th>
+					<button ng-click="calculatePrice()">Calculate Price</button>
+				</th>
+				<th>
+						<button ng-click="buyPizza()" ng-disabled="isPriceCalculated" >Buy</button>
+						<br>
+				</th>
+			</tr>
+	
+	</table>
+
+</body>
+
+</html>

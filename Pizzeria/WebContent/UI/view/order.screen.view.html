@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td,
+		th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h2>Order Screen</h2>
+
+	<table>
+		<tr>
+			<th>Indian Pizza</th>
+			<th>
+				<input type="text" ng-model="indianPizzaCount" ng-disabled="true">
+			</th>
+		</tr>
+
+		<tr>
+			<th>Italian Pizza</th>
+			<th>
+				<input type="text" ng-model="italianPizzaCount" ng-disabled="true">
+			</th>
+		</tr>
+		
+		<tr>
+			<th>Total Orders</th>
+			<th>
+				<input type="text" ng-model="totalCount" ng-disabled="true">
+			</th>
+		</tr>
+
+		<tr>
+			
+			<th>
+					<button ng-click="back()" >Back</button>
+					<br>
+			</th>
+		</tr>
+
+	
+	</table>
+
+</body>
+
+</html>

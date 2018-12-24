@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+    
+<!-- This will search for the all the files which ends with the .properties, and read the config from there  -->
+    
+    <context:property-placeholder location="classpath*:*.properties"/>
+    
+<!-- This will search for the all the files which ends with the .properties, and read the config from there  -->
+
+<!-- This will search for the all the java files/ beans which has the annotations like @Component or @Service etc and will be auto-registered with the spring  -->
+    
+    <context:annotation-config/>
+    <context:component-scan base-package="com.pizzeria"></context:component-scan>
+
+<!-- This will search for the all the java files/ beans inside base package folder which has the annotations like @Component or @Service etc and will be auto-registered with the spring  -->
+
+    
+<!-- For Enabling JPA-Transactions with Spring Start -->
+
+    <tx:annotation-driven transaction-manager="transactionMgr" />
+		
+	<bean id="transactionMgr" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="MgrFactory"/>
+    </bean>
+    
+        <bean id="MgrFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.pizzeria"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+                <prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    
+ <!-- For Enabling JPA-Transactions with Spring Stop -->   
+ 
+    </beans>
